@@ -30,7 +30,7 @@ public class PlayingCard implements Drawable {
         this.cardValueCharArray = cardValue.toCharArray();
         this.cardSuit = cardSuit;
         this.cardValueString = cardValue;
-
+        
             if (cardSuit.equals(PlayingCard.suit.CLUB)) {
                 suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/club.png"));
             }
