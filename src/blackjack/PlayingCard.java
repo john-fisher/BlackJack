@@ -3,9 +3,7 @@ package blackjack;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.awt.Toolkit;
 
 /**
  * @author John Fisher
@@ -33,23 +31,18 @@ public class PlayingCard implements Drawable {
         this.cardSuit = cardSuit;
         this.cardValueString = cardValue;
 
-        try {
             if (cardSuit.equals(PlayingCard.suit.CLUB)) {
-                suitImage = ImageIO.read(new File("club.png"));
+                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/club.png"));
             }
             if (cardSuit.equals(PlayingCard.suit.DIAMOND)) {
-                suitImage = ImageIO.read(new File("diamond.png"));
+                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/diamond.png"));
             }
             if (cardSuit.equals(PlayingCard.suit.SPADE)) {
-                suitImage = ImageIO.read(new File("spade.png"));
+                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/spade.png"));
             }
             if (cardSuit.equals(PlayingCard.suit.HEART)) {
-                suitImage = ImageIO.read(new File("heart.png"));
+                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/heart.png"));
             }
-        } catch (IOException ex) {
-            System.out.println("IOException in PlayingCard when attempting to open card images.");
-            System.exit(1);
-        }
 
         switch (cardValueString) {
             case "2":
@@ -92,12 +85,7 @@ public class PlayingCard implements Drawable {
         this.faceUp = faceUp;
 
         if (!faceUp) {
-            try {
-                suitImage = ImageIO.read(new File("cardart.png"));
-            } catch (IOException ex) {
-                System.out.println("IOException in PlayingCard when attempting to open card images.");
-                System.exit(1);
-            }
+            suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/cardart.png"));
         }
     }
 

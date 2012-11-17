@@ -6,6 +6,6 @@ package blackjack;
 public class BlackJack {
 
     public static void main(String[] args) {
-        TableFrame tF = new TableFrame();        
+        TableFrame tF = new TableFrame();  
     }
 }
