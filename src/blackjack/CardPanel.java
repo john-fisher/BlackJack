@@ -59,6 +59,7 @@ public class CardPanel extends JPanel {
                     preferredCardWidth,
                     preferredCardHeight);
         }
+        parent.repaintTable();
     }
 
     public void resetHands() {
@@ -80,8 +81,6 @@ public class CardPanel extends JPanel {
             
             playerHand.add(shoe.remove(0));
         }
-
-        parent.repaintTable();
     }
 
     public void hitPlayer() {
