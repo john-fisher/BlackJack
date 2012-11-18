@@ -26,6 +26,10 @@ public class TablePanel extends JPanel {
         add(controlPanel, BorderLayout.SOUTH);
     }
     
+    public double getControlPanelHeight(){
+        return controlPanel.getHeight();
+    }
+    
     @Override
     public void paintComponent(Graphics gPage){
         super.paintComponent(gPage);

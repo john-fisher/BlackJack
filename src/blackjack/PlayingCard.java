@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 /**
  * @author John Fisher
  */
+//Playing card class
 public class PlayingCard implements Drawable {
 
     private int cardPointValue;
@@ -17,11 +18,10 @@ public class PlayingCard implements Drawable {
     private Image suitImage;
     private boolean faceUp;
 
-    public enum suit {
+    //Enum for suits
+    public enum suit { HEART, SPADE, CLUB, DIAMOND }
 
-        HEART, SPADE, CLUB, DIAMOND
-    }
-
+    //default constructor
     public PlayingCard() {
     }
 
@@ -30,20 +30,22 @@ public class PlayingCard implements Drawable {
         this.cardValueCharArray = cardValue.toCharArray();
         this.cardSuit = cardSuit;
         this.cardValueString = cardValue;
-        
-            if (cardSuit.equals(PlayingCard.suit.CLUB)) {
-                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/club.png"));
-            }
-            if (cardSuit.equals(PlayingCard.suit.DIAMOND)) {
-                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/diamond.png"));
-            }
-            if (cardSuit.equals(PlayingCard.suit.SPADE)) {
-                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/spade.png"));
-            }
-            if (cardSuit.equals(PlayingCard.suit.HEART)) {
-                suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/heart.png"));
-            }
 
+        //Load images from jar Images directory
+        if (cardSuit.equals(PlayingCard.suit.CLUB)) {
+            suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/club.png"));
+        }
+        if (cardSuit.equals(PlayingCard.suit.DIAMOND)) {
+            suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/diamond.png"));
+        }
+        if (cardSuit.equals(PlayingCard.suit.SPADE)) {
+            suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/spade.png"));
+        }
+        if (cardSuit.equals(PlayingCard.suit.HEART)) {
+            suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/heart.png"));
+        }
+
+        //set the value of this Playing Card based on its cardValueString
         switch (cardValueString) {
             case "2":
                 cardPointValue = 2;
@@ -81,6 +83,7 @@ public class PlayingCard implements Drawable {
         }
     }
 
+    //Card flipper for dealers first card
     public void setFaceUp(boolean faceUp) {
         this.faceUp = faceUp;
 
@@ -88,11 +91,7 @@ public class PlayingCard implements Drawable {
             suitImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Images/cardart.png"));
         }
     }
-
-    public boolean getFaceUp() {
-        return faceUp;
-    }
-
+    
     public boolean isAce() {
         if (cardValueString.equals("A")) {
             return true;
@@ -114,8 +113,8 @@ public class PlayingCard implements Drawable {
 
     /*
      * Playing card suit graphic master images obtained from 
-     * http://sweetclipart.com and http://looble.org
-     * then modified via gimp
+     * http://sweetclipart.com. Samurai Penguine obtained from http://looble.org
+     * Background custom generated via GIMP
      */
     @Override
     public void draw(Graphics gPage, int startX, int startY, int width, int height) {

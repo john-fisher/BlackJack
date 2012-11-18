@@ -19,13 +19,15 @@ public class CardPanel extends JPanel {
     private Stack<PlayingCard> playerHand;
     private Graphics gPage;
     private TablePanel parent;
+    private int deckCount;
 
-    public enum HANDSTATE {
-
-        BUSTED, BLACKJACK, VALID, TWENTYONE
-    }
+    public enum HANDSTATE { BUSTED, BLACKJACK, VALID, TWENTYONE }
 
     public CardPanel(TablePanel parent) {
+        //We'll start with a shoe of 6 decks
+        //Future: Give user config option to adjust this
+        deckCount = 6;
+        
         this.parent = parent;
 
         preferredCardWidth = 100;
@@ -55,7 +57,7 @@ public class CardPanel extends JPanel {
         for (int i = 0; i < playerHand.size(); i++) {
             playerHand.get(i).draw(gPage,
                     (this.getWidth() / 2) - (preferredCardWidth / 2) + (i * 32),
-                    bottomHandStartY,
+                    (int)(parent.getHeight()-preferredCardHeight-parent.getControlPanelHeight()-topHandStartY),
                     preferredCardWidth,
                     preferredCardHeight);
         }
@@ -195,6 +197,10 @@ public class CardPanel extends JPanel {
     }
 
     private int getHandPointValue(Stack<PlayingCard> handToValue) {
+        /* 
+         * Calculate the hand points with cosideration of the ace's dual value 
+         * possibility
+         */
         int handValue = 0;
         int aceCount = 0;
 
@@ -234,17 +240,19 @@ public class CardPanel extends JPanel {
         valueOptions[11] = "K";
         valueOptions[12] = "A";
 
-        for (int i = 0; i < valueOptions.length; i++) {
-            shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.CLUB));
+        for(int loopCtr=0; loopCtr<deckCount; loopCtr++){
+            for (int i = 0; i < valueOptions.length; i++) {
+                shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.CLUB));
+            }
+            for (int i = 0; i < valueOptions.length; i++) {
+                shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.SPADE));
+            }
+            for (int i = 0; i < valueOptions.length; i++) {
+                shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.DIAMOND));
+            }
+            for (int i = 0; i < valueOptions.length; i++) {
+                shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.HEART));
         }
-        for (int i = 0; i < valueOptions.length; i++) {
-            shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.SPADE));
-        }
-        for (int i = 0; i < valueOptions.length; i++) {
-            shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.DIAMOND));
-        }
-        for (int i = 0; i < valueOptions.length; i++) {
-            shoe.add(new PlayingCard(valueOptions[i], PlayingCard.suit.HEART));
         }
     }
 

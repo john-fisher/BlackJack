@@ -26,9 +26,8 @@ public class ControlPanel extends JPanel {
         add(stayButton);
         
     }
-        
-    private class CustomButtonListener extends MouseAdapter {
 
+    private class CustomButtonListener extends MouseAdapter {
         @Override
         public void mouseReleased(MouseEvent me) {
             JButton sourceButton = (JButton) me.getSource();
